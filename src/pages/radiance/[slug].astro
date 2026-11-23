@@ -66,7 +66,7 @@ const schemas = [
         <span style="color:var(--terracotta-deep); font-weight:600;">{service.name}</span>
       </nav>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:44px; align-items:center;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:44px; align-items:center;">
         <div>
           <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
             <span class={`pill pill-${service.theme}`}>{service.intentLabel}</span>
@@ -75,13 +75,7 @@ const schemas = [
           <h1 class="h1">{service.name}</h1>
           <p class="lead" style="margin-bottom:24px;">{service.tagline}</p>
 
-          <!-- Q1: What is it? (Answer-first block for humans + LLMs) -->
-          <div class="answer-callout" style="margin-bottom:28px;">
-            <div style="font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--terracotta-deep); margin-bottom:6px;">
-              01 · WHAT IS IT?
-            </div>
-            <p style="margin:0; font-size:15px; color:var(--plum);">{service.answerFirstLead}</p>
-          </div>
+          <details class="faq-item" style="margin-bottom:24px;"><summary>About this practice<span aria-hidden="true">+</span></summary><div class="faq-answer">{service.answerFirstLead}</div></details>
 
           <div style="display:flex; flex-wrap:wrap; gap:12px;">
             <a href={`/book/?service=${service.slug}`} class="btn btn-primary">Book {service.shortName} &rarr;</a>
@@ -109,7 +103,7 @@ const schemas = [
           <div style="display:flex; flex-direction:column; gap:14px; margin-top:20px;">
             {
               service.whoItIsFor.map((point) => (
-                <div style="background:var(--ivory); border-radius:14px; padding:16px 18px; border:1px solid rgba(213,135,116,0.28); font-size:15px; color:var(--plum); display:flex; align-items:flex-start; gap:12px;">
+                <div style="background:var(--ivory); border-radius:14px; padding:16px 18px; border:1px solid rgba(150, 150, 150,0.28); font-size:15px; color:var(--plum); display:flex; align-items:flex-start; gap:12px;">
                   <span style="color:var(--terracotta-deep); font-weight:700; line-height:1.4;">✦</span>
                   <span>{point}</span>
                 </div>
@@ -220,7 +214,7 @@ const schemas = [
         <div style="max-width:600px;">
           <div class="eyebrow" style="color:var(--terracotta);">07 · YOUR NEXT STEP</div>
           <h2 class="h2" style="margin-bottom:8px;">Ready to reserve {service.shortName}?</h2>
-          <p style="font-size:15px; color:rgba(250,246,241,0.78); margin:0;">
+          <p style="font-size:15px; color:rgba(246, 246, 246,0.78); margin:0;">
             Choose your preferred date &amp; format online, or send Mehak a quick WhatsApp message with any question first.
           </p>
         </div>

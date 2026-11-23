@@ -31,7 +31,7 @@ export const EKAA_SITE = {
     name: 'Mehak Marwaha',
     role: 'Founder & Holistic Clarity Coach',
     shortBio:
-      'Dubai-based Holistic Clarity Coach, UCLA-certified Career Counselor, Vedic Numerologist, Reiki practitioner, Tarot Life Coach, and Akashic Record guide.',
+      'Dubai-based Holistic Clarity Coach, Vedic Numerologist, Reiki practitioner, Tarot Life Coach, and Akashic Record guide.',
     quote: 'I will not predict your future. I will guide you back to your own clarity.',
     podcastFeature: {
       title: 'Attitude of Gratitude Podcast',
@@ -65,7 +65,7 @@ export const EKAA_SITE = {
       summary:
         'Structured career guidance, psychometric profiling, IB/CBSE/UK/US subject selection, and international university admissions mentorship for students and families.',
       live: false, // <-- Flip to true and add externalUrl once Ekaa Rise launches
-      externalUrl: null, // e.g. 'https://ekaarise.com'
+      externalUrl: 'https://ekaa-rise.com',
       internalPath: '/ekaa-family/#rise',
       instagramHandle: '@ekaa_rise',
       instagramUrl: 'https://www.instagram.com/ekaa_rise',
@@ -80,7 +80,7 @@ export const EKAA_SITE = {
       summary:
         'Thoughtfully designed milestone celebrations, intimate birthday gatherings, corporate team-building experiences, and hands-on art and terrarium workshops.',
       live: false, // <-- Flip to true and add externalUrl once Ekaa Rejoice launches
-      externalUrl: null, // e.g. 'https://ekaarejoice.com'
+      externalUrl: 'https://ekaa-rejoice.com',
       internalPath: '/ekaa-family/#rejoice',
       instagramHandle: '@ekaa_rejoice',
       instagramUrl: 'https://www.instagram.com/ekaa_rejoice',

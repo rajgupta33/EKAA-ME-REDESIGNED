@@ -40,7 +40,7 @@ const schemas = [
 
   <section class="section">
     <div class="container">
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap:36px; align-items:start;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap:36px; align-items:start;">
         <!-- Left Interactive Request Form -->
         <div class="surface-card" style="padding:34px;">
           <h2 class="h3" style="font-size:30px; margin-bottom:6px;">Request Your Session Slot</h2>
@@ -122,7 +122,7 @@ const schemas = [
             </div>
           </form>
 
-          <div id="booking-confirmation" style="display:none; margin-top:20px; padding:18px; border-radius:14px; background:var(--sage-soft); border:1px solid rgba(155,166,148,0.45); font-size:14px; color:var(--plum);">
+          <div id="booking-confirmation" style="display:none; margin-top:20px; padding:18px; border-radius:14px; background:var(--sage-soft); border:1px solid rgba(162, 162, 162,0.45); font-size:14px; color:var(--plum);">
             <strong>Ready to send:</strong> Your personalized request has opened cleanly. You can also reach Mehak directly at <a href={EKAA_SITE.phoneUAEHref} style="text-decoration:underline; font-weight:600;">{EKAA_SITE.phoneUAE}</a> or <a href={`mailto:${EKAA_SITE.email}`} style="text-decoration:underline; font-weight:600;">{EKAA_SITE.email}</a>.
           </div>
         </div>
@@ -132,7 +132,7 @@ const schemas = [
           <div class="surface-dark" style="padding:32px;">
             <div class="eyebrow" style="color:var(--terracotta);">DIRECT CONCIERGE</div>
             <h3 class="serif" style="font-size:30px; color:var(--porcelain); margin:0 0 10px 0;">Prefer to ask first?</h3>
-            <p style="font-size:14.5px; color:rgba(250,246,241,0.78); margin:0 0 20px 0;">
+            <p style="font-size:14.5px; color:rgba(246, 246, 246,0.78); margin:0 0 20px 0;">
               If you aren’t sure whether Numerology, Tarot Coaching, or Reiki fits best today, send a quick voice or text message on WhatsApp.
             </p>
             <a
@@ -167,7 +167,7 @@ const schemas = [
     width: 100%;
     padding: 12px 15px;
     border-radius: 12px;
-    border: 1px solid #D7CBC1;
+    border: 1px solid #cdcdcd;
     background: var(--porcelain);
     font-family: var(--font-sans);
     font-size: 14.5px;
@@ -178,12 +178,12 @@ const schemas = [
   .form-input:focus {
     outline: none;
     border-color: var(--terracotta-deep);
-    box-shadow: 0 0 0 3px rgba(213, 135, 116, 0.2);
+    box-shadow: 0 0 0 3px rgba(150, 150, 150, 0.2);
     background: var(--ivory);
   }
 
   .format-radio {
-    border: 1px solid #D7CBC1;
+    border: 1px solid #cdcdcd;
     border-radius: 12px;
     padding: 12px 14px;
     text-align: center;
@@ -235,9 +235,10 @@ const schemas = [
     const format = formatInput ? formatInput.value : 'Online Video';
     const name = document.getElementById('book-name')?.value || '';
     const email = document.getElementById('book-email')?.value || '';
+    const phone = document.getElementById('book-phone')?.value || '';
     const day = document.getElementById('book-day')?.value || 'Flexible';
     const notes = document.getElementById('book-notes')?.value || '';
-    return `Hi Mehak, I would like to book a session at Ekaa Radiance.\n• Service: ${service}\n• Format: ${format}\n• Name: ${name}\n• Email: ${email}\n• Preferred Window: ${day}${notes ? `\n• Notes: ${notes}` : ''}`;
+    return `Hi Mehak, I would like to book a session at Ekaa Radiance.\n• Service: ${service}\n• Format: ${format}\n• Name: ${name}\n• Email: ${email}${phone ? `\n• Phone: ${phone}` : ''}\n• Preferred Window: ${day}${notes ? `\n• Notes: ${notes}` : ''}`;
   }
 
   const form = document.getElementById('booking-form');

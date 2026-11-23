@@ -29,7 +29,7 @@ const portraitSrc = EKAA_SITE.founder.hasPortraitPhoto
 
 <BaseLayout
   title="Mehak Marwaha | Founder of Ekaa Radiance, Rise & Rejoice"
-  description="Meet Mehak Marwaha—Dubai-based Holistic Clarity Coach, UCLA-certified Career Counselor, Vedic Numerologist, Reiki practitioner & founder of EKAA."
+  description="Meet Mehak Marwaha—Dubai-based Holistic Clarity Coach, Vedic Numerologist, Reiki practitioner & founder of EKAA."
   canonicalPath="/mehak-marwaha/"
   ogImage={portraitSrc}
   pageSchemas={schemas}
@@ -39,21 +39,15 @@ const portraitSrc = EKAA_SITE.founder.hasPortraitPhoto
     <div class="container">
       <div class="founder-intro-grid">
         <div style="max-width:460px; width:100%; justify-self:center;">
-          <div class="arch-frame" style="aspect-ratio: 4 / 4.6;">
+          <figure class="founder-portrait">
             <img
               src={portraitSrc}
               alt={EKAA_SITE.founder.hasPortraitPhoto ? 'Mehak Marwaha, founder of EKAA in Dubai' : 'An open journal and rose quartz on a sunlit stone desk'}
               fetchpriority="high"
-              style="width:100%; height:100%; object-fit:cover;"
+
             />
-            <div style="position:absolute; left:18px; right:18px; bottom:18px; background:rgba(38,27,34,0.92); color:var(--porcelain); border-radius:16px; padding:16px 18px; border:1px solid rgba(213,135,116,0.38);">
-              <div style="font-size:10px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terracotta); margin-bottom:4px;">
-                FOUNDER · EKAA
-              </div>
-              <div class="serif" style="font-size:25px; line-height:1.15;">{EKAA_SITE.founder.name}</div>
-              <div style="font-size:12px; color:rgba(250,246,241,0.72); margin-top:2px;">Dubai, UAE · Working Globally Online</div>
-            </div>
-          </div>
+            <figcaption class="portrait-caption"><strong>{EKAA_SITE.founder.name}</strong><br />Founder of EKAA · Dubai, UAE</figcaption>
+          </figure>
         </div>
 
         <div>
@@ -61,7 +55,7 @@ const portraitSrc = EKAA_SITE.founder.hasPortraitPhoto
           <h1 class="h1">A life shaped by <em>curiosity, care &amp; clarity</em>.</h1>
           <div class="answer-callout" style="margin:22px 0 26px 0;">
             <p style="margin:0; font-size:15.5px; color:var(--plum);">
-              <strong>Mehak Marwaha</strong> is a Dubai-based Holistic Clarity Coach, Spiritual Mentor, and UCLA-certified Career Counselor who founded <strong>EKAA</strong> (“Oneness”) to bridge ancient contemplative wisdom with calm, modern decision-making.
+              <strong>Mehak Marwaha</strong> is a Dubai-based holistic clarity coach and spiritual mentor who founded <strong>EKAA</strong> (“Oneness”) to bridge ancient contemplative wisdom with calm, modern decision-making.
             </p>
           </div>
           <p class="serif" style="font-size:26px; font-style:italic; color:var(--terracotta-deep); margin:0 0 28px 0; line-height:1.25;">
@@ -122,7 +116,6 @@ const portraitSrc = EKAA_SITE.founder.hasPortraitPhoto
           <div class="eyebrow">TRAINING &amp; MODALITIES</div>
           <h2 class="h2" style="font-size:34px;">Rooted in study &amp; lived practice.</h2>
           <ul style="margin:20px 0 0 0; padding-left:18px; display:flex; flex-direction:column; gap:10px; font-size:15px; color:var(--ink-muted);">
-            <li><strong style="color:var(--plum);">UCLA-Certified Career Counselor</strong> — formal academic &amp; career guidance training bridging practical strategy and personal purpose.</li>
             <li><strong style="color:var(--plum);">Vedic Numerology &amp; Lo Shu Grid</strong> — cycle mapping, compatibility patterns &amp; personal blueprint reflection.</li>
             <li><strong style="color:var(--plum);">Reiki Healing Energy Practitioner</strong> — in-person Dubai &amp; distance energetic restoration.</li>
             <li><strong style="color:var(--plum);">Tarot Life Coaching &amp; Akashic Records</strong> — non-predictive, consent-centered contemplative coaching.</li>
@@ -131,9 +124,9 @@ const portraitSrc = EKAA_SITE.founder.hasPortraitPhoto
 
         <div class="surface-dark" style="padding:32px; display:flex; flex-direction:column; justify-content:space-between; gap:20px;">
           <div>
-            <span class="pill" style="background:rgba(213,135,116,0.2); color:var(--terracotta); margin-bottom:14px;">MEDIA &amp; SPEAKING</span>
+            <span class="pill" style="background:rgba(150, 150, 150,0.2); color:var(--terracotta); margin-bottom:14px;">MEDIA &amp; SPEAKING</span>
             <h2 class="h2" style="font-size:34px;">{EKAA_SITE.founder.podcastFeature.title}</h2>
-            <p style="font-size:15px; color:rgba(250,246,241,0.8); margin:0 0 14px 0;">
+            <p style="font-size:15px; color:rgba(246, 246, 246,0.8); margin:0 0 14px 0;">
               {EKAA_SITE.founder.podcastFeature.note}
             </p>
             <div style="font-size:13px; color:var(--gold);">Published {EKAA_SITE.founder.podcastFeature.date}</div>

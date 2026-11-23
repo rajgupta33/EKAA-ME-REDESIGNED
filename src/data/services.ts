@@ -293,8 +293,8 @@ export const RADIANCE_SERVICES: RadianceService[] = [
     duration: '45 Minutes · 1:1',
     format: 'Online Video & Dubai In-Person',
     investmentLabel: 'Standalone or paired with Reiki',
-    image: '/images/reiki-sanctuary.jpg',
-    imageAlt: 'Calm sunlit studio shelf with smooth river stones and linen cushion for Pendulum Dowsing',
+    image: '/images/smoky-quartz-pendulum.webp',
+    imageAlt: 'A smoky quartz pendulum suspended above pale stone',
     tagline: 'Focused intuitive inquiry and energetic alignment check-ins.',
     answerFirstLead:
       'Pendulum Dowsing at Ekaa Radiance is a focused 45-minute session with Mehak Marwaha using intuitive pendulum calibration to explore energetic imbalances, clarify specific yes/no inquiries, and support calm emotional alignment.',

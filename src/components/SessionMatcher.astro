@@ -13,14 +13,14 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
 ---
 
 <div class="surface-dark matcher-box" id="session-matcher" style="padding:36px 32px;">
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:32px; align-items:center;">
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap:32px; align-items:center;">
     <div>
-      <div class="eyebrow" style="color:var(--terracotta); margin-bottom:10px;">INTERACTIVE GUIDANCE</div>
+      <div class="eyebrow" style="color:var(--terracotta); margin-bottom:10px;">Session finder</div>
       <h3 class="serif" style="font-size:clamp(1.85rem, 2.8vw, 2.5rem); color:var(--porcelain); margin:0 0 10px 0; line-height:1.1;">
-        Not sure where to begin? <em style="color:var(--terracotta);">Match your moment.</em>
+        Find a session for you
       </h3>
-      <p style="font-size:14.5px; color:rgba(250,246,241,0.74); margin:0 0 22px 0;">
-        Select what you are navigating today to reveal Mehak’s recommended starting session—zero guesswork.
+      <p style="font-size:14.5px; color:rgba(246, 246, 246,0.74); margin:0 0 22px 0;">
+        Choose what brings you here and how you’d like to meet.
       </p>
 
       <!-- Step 1: Emotional Need -->
@@ -29,12 +29,12 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
           1. WHAT FEELS CLOSEST RIGHT NOW?
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;" role="group" aria-label="Select your current need">
-          <button type="button" class="matcher-chip active" data-need="clarity-decisions">Clarity on a Life Choice</button>
-          <button type="button" class="matcher-chip" data-need="clarity-patterns">Life Blueprint &amp; Timing</button>
-          <button type="button" class="matcher-chip" data-need="calm-rest">Deep Rest &amp; Stress Relief</button>
-          <button type="button" class="matcher-chip" data-need="calm-mind">Daily Calm &amp; Focus</button>
-          <button type="button" class="matcher-chip" data-need="soul-roots">Recurring Soul Patterns</button>
-          <button type="button" class="matcher-chip" data-need="community">Learn in a Workshop</button>
+          <button type="button" aria-pressed="true" class="matcher-chip active" data-need="clarity-decisions">Clarity on a Life Choice</button>
+          <button type="button" aria-pressed="false" class="matcher-chip" data-need="clarity-patterns">Life Blueprint &amp; Timing</button>
+          <button type="button" aria-pressed="false" class="matcher-chip" data-need="calm-rest">Deep Rest &amp; Stress Relief</button>
+          <button type="button" aria-pressed="false" class="matcher-chip" data-need="calm-mind">Daily Calm &amp; Focus</button>
+          <button type="button" aria-pressed="false" class="matcher-chip" data-need="soul-roots">Recurring Soul Patterns</button>
+          <button type="button" aria-pressed="false" class="matcher-chip" data-need="community">Learn in a Workshop</button>
         </div>
       </div>
 
@@ -44,25 +44,25 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
           2. PREFERRED FORMAT
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;" role="group" aria-label="Select preferred format">
-          <button type="button" class="format-chip active" data-format="Online Video">Online Video (Global)</button>
-          <button type="button" class="format-chip" data-format="Dubai In-Person">Dubai In-Person</button>
+          <button type="button" aria-pressed="true" class="format-chip active" data-format="Online Video">Online Video (Global)</button>
+          <button type="button" aria-pressed="false" class="format-chip" data-format="Dubai In-Person">Dubai In-Person</button>
         </div>
       </div>
     </div>
 
     <!-- Live Result Card -->
-    <div style="background:rgba(250,246,241,0.06); border:1px solid rgba(213,135,116,0.34); border-radius:20px; padding:26px; display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
+    <div style="background:rgba(246, 246, 246,0.06); border:1px solid rgba(150, 150, 150,0.34); border-radius:20px; padding:26px; display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
       <div>
         <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px;">
           <span style="font-size:10.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terracotta);">
             RECOMMENDED STARTING PATH
           </span>
-          <span id="matcher-meta" style="font-size:11px; color:rgba(250,246,241,0.68);">60 Minutes · Online Video</span>
+          <span id="matcher-meta" style="font-size:11px; color:rgba(246, 246, 246,0.68);">60 Minutes · Online Video</span>
         </div>
-        <h4 id="matcher-title" class="serif" style="font-size:32px; color:var(--porcelain); margin:0 0 8px 0; line-height:1.1;">
+        <h4 aria-live="polite" id="matcher-title" class="serif" style="font-size:32px; color:var(--porcelain); margin:0 0 8px 0; line-height:1.1;">
           Tarot Life Coaching
         </h4>
-        <p id="matcher-desc" style="font-size:14px; line-height:1.6; color:rgba(250,246,241,0.8); margin:0;">
+        <p id="matcher-desc" style="font-size:14px; line-height:1.6; color:rgba(246, 246, 246,0.8); margin:0;">
           Thoughtful, non-predictive tarot conversations for real-life decisions.
         </p>
       </div>
@@ -82,9 +82,9 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
 <style>
   .matcher-chip,
   .format-chip {
-    background: rgba(250, 246, 241, 0.08);
-    color: rgba(250, 246, 241, 0.84);
-    border: 1px solid rgba(250, 246, 241, 0.16);
+    background: rgba(246, 246, 246, 0.08);
+    color: rgba(246, 246, 246, 0.84);
+    border: 1px solid rgba(246, 246, 246, 0.16);
     border-radius: 999px;
     padding: 8px 15px;
     font-family: var(--font-sans);
@@ -97,7 +97,7 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
   .matcher-chip:hover,
   .format-chip:hover {
     border-color: var(--terracotta);
-    color: #FAF6F1;
+    color: #f6f6f6;
   }
 
   .matcher-chip.active,
@@ -144,8 +144,9 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
 
   root?.querySelectorAll('.matcher-chip').forEach((btn) => {
     btn.addEventListener('click', () => {
-      root.querySelectorAll('.matcher-chip').forEach((b) => b.classList.remove('active'));
+      root.querySelectorAll('.matcher-chip').forEach((b) => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
       currentNeed = btn.getAttribute('data-need') || 'clarity-decisions';
       renderMatch();
     });
@@ -153,8 +154,9 @@ const matcherData = RADIANCE_SERVICES.map((s) => ({
 
   root?.querySelectorAll('.format-chip').forEach((btn) => {
     btn.addEventListener('click', () => {
-      root.querySelectorAll('.format-chip').forEach((b) => b.classList.remove('active'));
+      root.querySelectorAll('.format-chip').forEach((b) => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
       currentFormat = btn.getAttribute('data-format') || 'Online Video';
       renderMatch();
     });
