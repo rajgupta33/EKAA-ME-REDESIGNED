@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { RADIANCE_SERVICES, type RadianceService } from '../../data/services';
+import { EKAA_SITE, buildWhatsAppUrl } from '../../data/site';
+
+export function getStaticPaths() {
+  return RADIANCE_SERVICES.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+interface Props {
+  service: RadianceService;
+}
+
+const { service } = Astro.props;
+const canonicalPath = `/radiance/${service.slug}/`;
+const whatsappHref = buildWhatsAppUrl(service.whatsappPrefill);
+const otherServices = RADIANCE_SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
+
+const schemas = [
+  {
+    '@type': 'Service',
+    name: service.name,
+    serviceType: service.name,
+    description: service.answerFirstLead,
+    provider: { '@id': `${EKAA_SITE.siteUrl}/#organization` },
+    areaServed: ['Dubai', 'United Arab Emirates', 'Worldwide Online'],
+    url: `${EKAA_SITE.siteUrl}${canonicalPath}`,
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: service.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Ekaa Radiance', item: `${EKAA_SITE.siteUrl}/radiance/` },
+      { '@type': 'ListItem', position: 3, name: service.name, item: `${EKAA_SITE.siteUrl}${canonicalPath}` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={service.seoTitle}
+  description={service.seoDescription}
+  canonicalPath={canonicalPath}
+  ogImage={service.image}
+  pageSchemas={schemas}
+>
+  <!-- Breadcrumb + Hero Split -->
+  <section style="padding:36px 0 64px 0; border-bottom:1px solid var(--border);">
+    <div class="container">
+      <nav aria-label="Breadcrumb" style="font-size:12px; color:var(--ink-light); margin-bottom:24px; display:flex; gap:8px; flex-wrap:wrap;">
+        <a href="/" style="hover:color:var(--plum);">Home</a>
+        <span>/</span>
+        <a href="/radiance/">Ekaa Radiance</a>
+        <span>/</span>
+        <span style="color:var(--terracotta-deep); font-weight:600;">{service.name}</span>
+      </nav>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:44px; align-items:center;">
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+            <span class={`pill pill-${service.theme}`}>{service.intentLabel}</span>
+            <span class="pill pill-sand">{service.duration}</span>
+          </div>
+          <h1 class="h1">{service.name}</h1>
+          <p class="lead" style="margin-bottom:24px;">{service.tagline}</p>
+
+          <!-- Q1: What is it? (Answer-first block for humans + LLMs) -->
+          <div class="answer-callout" style="margin-bottom:28px;">
+            <div style="font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--terracotta-deep); margin-bottom:6px;">
+              01 · WHAT IS IT?
+            </div>
+            <p style="margin:0; font-size:15px; color:var(--plum);">{service.answerFirstLead}</p>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <a href={`/book/?service=${service.slug}`} class="btn btn-primary">Book {service.shortName} &rarr;</a>
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" class="btn btn-soft">
+              Ask Mehak on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div style="border-radius:24px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-soft); aspect-ratio: 4 / 3.4;">
+          <img src={service.image} alt={service.imageAlt} fetchpriority="high" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q2 & Q3: Who is it for + What happens inside -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items:start;">
+        <!-- Q2: Who is it for? -->
+        <div class="surface-terracotta" style="padding:32px;">
+          <div class="eyebrow">02 · WHO IS IT FOR?</div>
+          <h2 class="h2" style="font-size:32px;">A supportive fit if you are…</h2>
+          <div style="display:flex; flex-direction:column; gap:14px; margin-top:20px;">
+            {
+              service.whoItIsFor.map((point) => (
+                <div style="background:var(--ivory); border-radius:14px; padding:16px 18px; border:1px solid rgba(213,135,116,0.28); font-size:15px; color:var(--plum); display:flex; align-items:flex-start; gap:12px;">
+                  <span style="color:var(--terracotta-deep); font-weight:700; line-height:1.4;">✦</span>
+                  <span>{point}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Q3: What happens inside? -->
+        <div class="surface-card" style="padding:32px;">
+          <div class="eyebrow">03 · WHAT HAPPENS INSIDE?</div>
+          <h2 class="h2" style="font-size:32px;">Your session rhythm.</h2>
+          <div style="display:flex; flex-direction:column; gap:18px; margin-top:20px;">
+            {
+              service.whatHappensSteps.map((step, idx) => (
+                <div style="display:flex; gap:16px; align-items:flex-start; padding-bottom:16px; border-bottom:1px solid var(--border);">
+                  <span class="serif" style="width:36px; height:36px; border-radius:50%; background:var(--plum); color:var(--porcelain); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">
+                    {idx + 1}
+                  </span>
+                  <div>
+                    <h3 style="font-size:16px; font-weight:700; color:var(--plum); margin:0 0 4px 0;">{step.title}</h3>
+                    <p style="font-size:14.5px; color:var(--ink-muted); margin:0;">{step.detail}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q4 & Q5: Who guides it + Format, Investment & Preparation -->
+  <section class="section-tight" style="background:var(--ivory); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="grid-2">
+        <!-- Q4: Who guides it? -->
+        <div class="surface-sand" style="padding:32px; display:flex; flex-direction:column; justify-content:space-between; gap:20px;">
+          <div>
+            <div class="eyebrow">04 · WHO GUIDES IT?</div>
+            <h2 class="h2" style="font-size:32px;">Guided personally by {EKAA_SITE.founder.name}</h2>
+            <p style="font-size:15px; color:var(--ink-muted); margin:0 0 14px 0;">
+              {EKAA_SITE.founder.shortBio}
+            </p>
+            <p class="serif" style="font-size:21px; font-style:italic; color:var(--plum); margin:0;">
+              “{EKAA_SITE.founder.quote}”
+            </p>
+          </div>
+          <div>
+            <a href="/mehak-marwaha/" style="font-size:13.5px; font-weight:700; color:var(--terracotta-deep);">
+              Read Mehak’s credentials &amp; story &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Q5: Investment, Format & Preparation -->
+        <div class="surface-card" style="padding:32px; background:var(--porcelain); display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
+          <div>
+            <div class="eyebrow">05 · FORMAT, INVESTMENT &amp; PREP</div>
+            <h2 class="h2" style="font-size:32px;">Clear logistics before you book.</h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0;">
+              <div style="background:var(--ivory); border:1px solid var(--border); border-radius:12px; padding:12px 14px;">
+                <div style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:var(--gold-text); text-transform:uppercase;">FORMAT</div>
+                <div style="font-size:13.5px; font-weight:600; color:var(--plum); margin-top:3px;">{service.format}</div>
+              </div>
+              <div style="background:var(--ivory); border:1px solid var(--border); border-radius:12px; padding:12px 14px;">
+                <div style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:var(--gold-text); text-transform:uppercase;">INVESTMENT</div>
+                <div style="font-size:13.5px; font-weight:600; color:var(--plum); margin-top:3px;">{service.investmentLabel}</div>
+              </div>
+            </div>
+            <ul style="margin:0; padding-left:18px; font-size:14px; color:var(--ink-muted);">
+              {service.preparationNotes.map((note) => <li style="margin-bottom:6px;">{note}</li>)}
+            </ul>
+          </div>
+          <div style="font-size:12.5px; color:var(--ink-light);">
+            Includes complimentary 24-hour rescheduling flexibility.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q6: Populated FAQs -->
+  <section class="section">
+    <div class="container" style="max-width:860px;">
+      <div class="eyebrow">06 · WHAT PEOPLE ASK</div>
+      <h2 class="h2" style="margin-bottom:26px;">Questions about <em>{service.shortName}</em>.</h2>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        {
+          service.faqs.map((faq, idx) => (
+            <details class="faq-item" open={idx === 0}>
+              <summary>
+                <span>{faq.question}</span>
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">{faq.answer}</div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Q7: Next Step CTA + Other Modalities -->
+  <section class="section-tight" style="background:var(--ivory); border-top:1px solid var(--border);">
+    <div class="container">
+      <div class="surface-dark" style="padding:42px 36px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:24px; margin-bottom:54px;">
+        <div style="max-width:600px;">
+          <div class="eyebrow" style="color:var(--terracotta);">07 · YOUR NEXT STEP</div>
+          <h2 class="h2" style="margin-bottom:8px;">Ready to reserve {service.shortName}?</h2>
+          <p style="font-size:15px; color:rgba(250,246,241,0.78); margin:0;">
+            Choose your preferred date &amp; format online, or send Mehak a quick WhatsApp message with any question first.
+          </p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:12px;">
+          <a href={`/book/?service=${service.slug}`} class="btn btn-terracotta">Book a Private Session &rarr;</a>
+          <a href={whatsappHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
+            Ask on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-text);">
+        EXPLORE OTHER RADIANCE PATHWAYS
+      </div>
+      <div class="grid-3">
+        {
+          otherServices.map((other) => (
+            <a href={`/radiance/${other.slug}/`} class="surface-card interactive" style="padding:22px; background:var(--porcelain);">
+              <div style="font-size:11px; font-weight:700; color:var(--terracotta-deep); margin-bottom:6px;">{other.duration}</div>
+              <h3 class="serif" style="font-size:24px; color:var(--plum); margin:0 0 6px 0;">{other.name}</h3>
+              <p style="font-size:13.5px; color:var(--ink-muted); margin:0 0 12px 0;">{other.tagline}</p>
+              <span style="font-size:12.5px; font-weight:600; color:var(--plum);">Explore &rarr;</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

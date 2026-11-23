@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EKAA_SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Privacy Policy | EKAA & Ekaa Radiance"
+  description="How EKAA and Mehak Marwaha respect client confidentiality, personal birth details, and contact information on ekaa.me."
+  canonicalPath="/privacy-policy/"
+>
+  <section class="section">
+    <div class="container" style="max-width:780px;">
+      <div class="eyebrow">PRIVACY &amp; CONFIDENTIALITY</div>
+      <h1 class="h1" style="font-size:48px;">Privacy Policy</h1>
+      <p style="color:var(--ink-muted); font-size:15px;">Effective November 2026 · {EKAA_SITE.brandName} ({EKAA_SITE.siteUrl})</p>
+
+      <div class="surface-card" style="padding:32px; margin-top:24px; display:flex; flex-direction:column; gap:18px; font-size:15px; color:var(--ink-muted);">
+        <div>
+          <h2 class="h3" style="font-size:24px;">1. Information You Share Voluntarily</h2>
+          <p style="margin:0;">When you book a session or message us via WhatsApp or email ({EKAA_SITE.email}), you may share your name, contact details, and—for Vedic Numerology—your date of birth and name. This information is used solely to prepare and conduct your consultation.</p>
+        </div>
+        <div>
+          <h2 class="h3" style="font-size:24px;">2. Strict 1:1 Confidentiality</h2>
+          <p style="margin:0;">Everything discussed during your session remains confidential. Testimonials or client reflections are never published without explicit prior consent.</p>
+        </div>
+        <div>
+          <h2 class="h3" style="font-size:24px;">3. No Third-Party Data Selling</h2>
+          <p style="margin:0;">EKAA never sells, rents, or distributes your personal data to third-party advertisers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

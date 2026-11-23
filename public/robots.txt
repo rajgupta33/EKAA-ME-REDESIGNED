@@ -1,0 +1,22 @@
+# https://ekaa.me/robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/private/
+
+# Explicitly welcome Search & AI Citation Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+Sitemap: https://ekaa.me/sitemap.xml

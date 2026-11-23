@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EKAA_SITE, buildWhatsAppUrl, getVerticalHref } from '../data/site';
+
+const riseLink = getVerticalHref(EKAA_SITE.verticals.rise);
+const rejoiceLink = getVerticalHref(EKAA_SITE.verticals.rejoice);
+
+const schemas = [
+  {
+    '@type': 'ProfilePage',
+    '@id': `${EKAA_SITE.siteUrl}/mehak-marwaha/#webpage`,
+    url: `${EKAA_SITE.siteUrl}/mehak-marwaha/`,
+    name: 'Mehak Marwaha — Founder of EKAA & Ekaa Radiance',
+    mainEntity: { '@id': `${EKAA_SITE.siteUrl}/#mehak-marwaha` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Mehak Marwaha', item: `${EKAA_SITE.siteUrl}/mehak-marwaha/` },
+    ],
+  },
+];
+
+const portraitSrc = EKAA_SITE.founder.hasPortraitPhoto
+  ? EKAA_SITE.founder.portraitPath
+  : '/images/reflection-journal.webp';
+---
+
+<BaseLayout
+  title="Mehak Marwaha | Founder of Ekaa Radiance, Rise & Rejoice"
+  description="Meet Mehak Marwaha—Dubai-based Holistic Clarity Coach, UCLA-certified Career Counselor, Vedic Numerologist, Reiki practitioner & founder of EKAA."
+  canonicalPath="/mehak-marwaha/"
+  ogImage={portraitSrc}
+  pageSchemas={schemas}
+>
+  <!-- Hero Split -->
+  <section style="padding:42px 0 72px 0; border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="founder-intro-grid">
+        <div style="max-width:460px; width:100%; justify-self:center;">
+          <div class="arch-frame" style="aspect-ratio: 4 / 4.6;">
+            <img
+              src={portraitSrc}
+              alt={EKAA_SITE.founder.hasPortraitPhoto ? 'Mehak Marwaha, founder of EKAA in Dubai' : 'An open journal and rose quartz on a sunlit stone desk'}
+              fetchpriority="high"
+              style="width:100%; height:100%; object-fit:cover;"
+            />
+            <div style="position:absolute; left:18px; right:18px; bottom:18px; background:rgba(38,27,34,0.92); color:var(--porcelain); border-radius:16px; padding:16px 18px; border:1px solid rgba(213,135,116,0.38);">
+              <div style="font-size:10px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terracotta); margin-bottom:4px;">
+                FOUNDER · EKAA
+              </div>
+              <div class="serif" style="font-size:25px; line-height:1.15;">{EKAA_SITE.founder.name}</div>
+              <div style="font-size:12px; color:rgba(250,246,241,0.72); margin-top:2px;">Dubai, UAE · Working Globally Online</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="eyebrow">THE FOUNDER BEHIND EKAA</div>
+          <h1 class="h1">A life shaped by <em>curiosity, care &amp; clarity</em>.</h1>
+          <div class="answer-callout" style="margin:22px 0 26px 0;">
+            <p style="margin:0; font-size:15.5px; color:var(--plum);">
+              <strong>Mehak Marwaha</strong> is a Dubai-based Holistic Clarity Coach, Spiritual Mentor, and UCLA-certified Career Counselor who founded <strong>EKAA</strong> (“Oneness”) to bridge ancient contemplative wisdom with calm, modern decision-making.
+            </p>
+          </div>
+          <p class="serif" style="font-size:26px; font-style:italic; color:var(--terracotta-deep); margin:0 0 28px 0; line-height:1.25;">
+            “{EKAA_SITE.founder.quote}”
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <a href="/book/" class="btn btn-primary">Book With Mehak &rarr;</a>
+            <a href={buildWhatsAppUrl('Hi Mehak, I read your story on ekaa.me and would love to connect.')} target="_blank" rel="noopener noreferrer" class="btn btn-soft">
+              Message on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Chapter Journey Timeline -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width:680px; margin-bottom:40px;">
+        <div class="eyebrow">THE JOURNEY</div>
+        <h2 class="h2">From corporate pace to <em>Oneness</em>.</h2>
+      </div>
+
+      <div class="grid-3">
+        <div class="surface-card" style="padding:30px;">
+          <div class="serif" style="font-size:36px; color:var(--terracotta-deep); margin-bottom:10px;">Chapter 01</div>
+          <h3 class="h3">Corporate Grounding in Dubai</h3>
+          <p style="font-size:14.5px; color:var(--ink-muted); margin:0;">
+            Years inside fast-paced corporate environments taught Mehak how real ambition feels—and how easily talented people lose inner quiet under relentless timelines.
+          </p>
+        </div>
+
+        <div class="surface-terracotta" style="padding:30px;">
+          <div class="serif" style="font-size:36px; color:var(--terracotta-deep); margin-bottom:10px;">Chapter 02</div>
+          <h3 class="h3">Meaning Behind “EKAA”</h3>
+          <p style="font-size:14.5px; color:var(--ink-muted); margin:0;">
+            Inspired by the concept of <em>Oneness</em>, Mehak immersed in Vedic Numerology, Reiki energy work, Tarot coaching, and Akashic inquiry—translating depth into everyday language.
+          </p>
+        </div>
+
+        <div class="surface-sand" style="padding:30px;">
+          <div class="serif" style="font-size:36px; color:var(--gold-text); margin-bottom:10px;">Chapter 03</div>
+          <h3 class="h3">Three Connected Paths</h3>
+          <p style="font-size:14.5px; color:var(--ink-muted); margin:0;">
+            EKAA grew into three distinct pillars: <strong>Radiance</strong> (healing &amp; clarity), <strong>Rise</strong> (student admissions &amp; career counseling), and <strong>Rejoice</strong> (celebrations &amp; creative workshops).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credentials & Media -->
+  <section class="section-tight" id="media" style="background:var(--ivory); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="grid-2">
+        <div class="surface-card" style="padding:32px; background:var(--porcelain);">
+          <div class="eyebrow">TRAINING &amp; MODALITIES</div>
+          <h2 class="h2" style="font-size:34px;">Rooted in study &amp; lived practice.</h2>
+          <ul style="margin:20px 0 0 0; padding-left:18px; display:flex; flex-direction:column; gap:10px; font-size:15px; color:var(--ink-muted);">
+            <li><strong style="color:var(--plum);">UCLA-Certified Career Counselor</strong> — formal academic &amp; career guidance training bridging practical strategy and personal purpose.</li>
+            <li><strong style="color:var(--plum);">Vedic Numerology &amp; Lo Shu Grid</strong> — cycle mapping, compatibility patterns &amp; personal blueprint reflection.</li>
+            <li><strong style="color:var(--plum);">Reiki Healing Energy Practitioner</strong> — in-person Dubai &amp; distance energetic restoration.</li>
+            <li><strong style="color:var(--plum);">Tarot Life Coaching &amp; Akashic Records</strong> — non-predictive, consent-centered contemplative coaching.</li>
+          </ul>
+        </div>
+
+        <div class="surface-dark" style="padding:32px; display:flex; flex-direction:column; justify-content:space-between; gap:20px;">
+          <div>
+            <span class="pill" style="background:rgba(213,135,116,0.2); color:var(--terracotta); margin-bottom:14px;">MEDIA &amp; SPEAKING</span>
+            <h2 class="h2" style="font-size:34px;">{EKAA_SITE.founder.podcastFeature.title}</h2>
+            <p style="font-size:15px; color:rgba(250,246,241,0.8); margin:0 0 14px 0;">
+              {EKAA_SITE.founder.podcastFeature.note}
+            </p>
+            <div style="font-size:13px; color:var(--gold);">Published {EKAA_SITE.founder.podcastFeature.date}</div>
+          </div>
+
+          <div style="border-top:1px solid var(--border-dark); padding-top:18px; display:flex; flex-wrap:wrap; gap:12px;">
+            <a href="/radiance/" class="btn btn-terracotta">Explore Radiance Sessions &rarr;</a>
+            <a href="/insights/why-i-founded-ekaa-in-dubai/" class="btn btn-outline-light">Read Founder Essay</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Umbrella Note -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="surface-sand" style="padding:28px 32px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px;">
+        <div style="max-width:680px;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-text); margin-bottom:4px;">ACROSS THE EKAA FAMILY</div>
+          <p style="margin:0; font-size:15px; color:var(--plum);">
+            Alongside Ekaa Radiance on <strong>ekaa.me</strong>, Mehak also leads <a href={riseLink.href} style="text-decoration:underline; font-weight:600;">Ekaa Rise</a> (foreign admissions &amp; career counseling) and <a href={rejoiceLink.href} style="text-decoration:underline; font-weight:600;">Ekaa Rejoice</a> (curated celebrations).
+          </p>
+        </div>
+        <a href="/ekaa-family/" class="btn btn-outline">View EKAA Umbrella &rarr;</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .founder-intro-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: clamp(28px, 6vw, 64px);
+  }
+
+  @media (max-width: 699px) {
+    .founder-intro-grid { grid-template-columns: minmax(0, 1fr); }
+    .founder-intro-grid > :last-child { grid-row: 1; }
+  }
+</style>

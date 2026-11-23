@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EKAA_SITE, buildWhatsAppUrl } from '../data/site';
+
+const schemas = [
+  {
+    '@type': 'ContactPage',
+    '@id': `${EKAA_SITE.siteUrl}/contact/#webpage`,
+    url: `${EKAA_SITE.siteUrl}/contact/`,
+    name: 'Contact EKAA & Mehak Marwaha — Dubai & Online',
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Contact', item: `${EKAA_SITE.siteUrl}/contact/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Contact EKAA & Mehak Marwaha | Dubai & Global Online"
+  description="Reach Mehak Marwaha for Ekaa Radiance sessions, workshops, or general enquiries via WhatsApp, UAE/India phone, or info@ekaa.me."
+  canonicalPath="/contact/"
+  pageSchemas={schemas}
+>
+  <section class="section-tight" style="border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:740px;">
+      <div class="eyebrow">CONNECT WITH EKAA</div>
+      <h1 class="h1">We’re always a <em>calm message</em> away.</h1>
+      <p class="lead">
+        Whether you are enquiring about a 1:1 Radiance session, a private Dubai workshop, or Ekaa Rise &amp; Rejoice collaborations, reach us directly below.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3" style="margin-bottom:44px;">
+        <div class="surface-card" style="padding:28px;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.15em; color:var(--terracotta-deep); text-transform:uppercase; margin-bottom:8px;">WHATSAPP &amp; PHONE</div>
+          <h2 class="h3" style="font-size:26px;">Direct Call or Message</h2>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px; font-size:15px;">
+            <a href={EKAA_SITE.phoneUAEHref} style="color:var(--plum); font-weight:600;">UAE: {EKAA_SITE.phoneUAE}</a>
+            <a href={EKAA_SITE.phoneIndiaHref} style="color:var(--plum); font-weight:600;">India: {EKAA_SITE.phoneIndia}</a>
+            <a
+              href={buildWhatsAppUrl('Hi Mehak, I have an enquiry from ekaa.me/contact/.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color:var(--terracotta-deep); font-weight:700; margin-top:4px;"
+            >
+              Open WhatsApp Chat &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="surface-card" style="padding:28px;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.15em; color:var(--gold-text); text-transform:uppercase; margin-bottom:8px;">OFFICIAL EMAIL</div>
+          <h2 class="h3" style="font-size:26px;">Write to Us</h2>
+          <p style="font-size:14px; color:var(--ink-muted); margin:10px 0 14px 0;">
+            All Radiance sessions, workshops, podcast invites &amp; brand partnerships:
+          </p>
+          <a href={`mailto:${EKAA_SITE.email}`} style="font-size:16px; font-weight:700; color:var(--plum); text-decoration:underline;">
+            {EKAA_SITE.email}
+          </a>
+        </div>
+
+        <div class="surface-card" style="padding:28px;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.15em; color:#465440; text-transform:uppercase; margin-bottom:8px;">STUDIO &amp; SOCIALS</div>
+          <h2 class="h3" style="font-size:26px;">Dubai &amp; Online</h2>
+          <p style="font-size:14px; color:var(--ink-muted); margin:10px 0 14px 0;">
+            {EKAA_SITE.location} · Serving clients worldwide via private video.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:13.5px; font-weight:600; color:var(--plum);">
+            <a href={EKAA_SITE.verticals.radiance.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram {EKAA_SITE.verticals.radiance.instagramHandle} ↗</a>
+            <a href={EKAA_SITE.verticals.rise.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram {EKAA_SITE.verticals.rise.instagramHandle} ↗</a>
+            <a href={EKAA_SITE.verticals.rejoice.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram {EKAA_SITE.verticals.rejoice.instagramHandle} ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="surface-dark" style="padding:36px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px;">
+        <div>
+          <h2 class="h2" style="font-size:32px; margin-bottom:6px;">Looking to reserve a 1:1 consultation?</h2>
+          <p style="font-size:14.5px; color:rgba(250,246,241,0.78); margin:0;">
+            Use our streamlined booking page to pick your modality, format, and preferred time window.
+          </p>
+        </div>
+        <a href="/book/" class="btn btn-terracotta">Go to Session Booking &rarr;</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

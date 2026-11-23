@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { INSIGHT_ARTICLES } from '../../data/insights';
+import { EKAA_SITE } from '../../data/site';
+
+const schemas = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${EKAA_SITE.siteUrl}/insights/#webpage`,
+    url: `${EKAA_SITE.siteUrl}/insights/`,
+    name: 'Ekaa Insights — Grounded Guides on Numerology, Reiki & Clarity',
+    author: { '@id': `${EKAA_SITE.siteUrl}/#mehak-marwaha` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: `${EKAA_SITE.siteUrl}/insights/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Clarity Insights | Numerology, Reiki & Reflection Guides | Ekaa"
+  description="Thoughtful, plain-language guides by Mehak Marwaha answering real questions about Vedic Numerology, distance Reiki in Dubai, Tarot coaching, and personal clarity."
+  canonicalPath="/insights/"
+  pageSchemas={schemas}
+>
+  <section class="section-tight" style="border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="max-width:740px;">
+        <div class="eyebrow">JOURNAL &amp; ANSWERS</div>
+        <h1 class="h1">Questions asked softly, answered <em>with clarity</em>.</h1>
+        <p class="lead">
+          Every guide opens with a concise takeaway so you can find grounded answers quickly—written directly by Mehak Marwaha.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Filter Pills -->
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px;" role="group" aria-label="Filter insights by topic">
+        <button type="button" class="btn btn-primary filter-btn active" data-cluster="all" style="min-height:40px; padding:8px 18px;">All Guides</button>
+        <button type="button" class="btn btn-soft filter-btn" data-cluster="Numerology" style="min-height:40px; padding:8px 18px;">Numerology</button>
+        <button type="button" class="btn btn-soft filter-btn" data-cluster="Reiki & Calm" style="min-height:40px; padding:8px 18px;">Reiki &amp; Calm</button>
+        <button type="button" class="btn btn-soft filter-btn" data-cluster="Founder Clarity" style="min-height:40px; padding:8px 18px;">Founder Clarity</button>
+      </div>
+
+      <div class="grid-3" id="insights-grid">
+        {
+          INSIGHT_ARTICLES.map((post) => (
+            <a
+              href={`/insights/${post.slug}/`}
+              class="surface-card interactive insight-card"
+              data-cluster={post.cluster}
+              style="overflow:hidden; display:flex; flex-direction:column;"
+            >
+              <div style="aspect-ratio: 16 / 10; overflow:hidden;">
+                <img src={post.image} alt={post.imageAlt} class="img-zoom" style="width:100%; height:100%; object-fit:cover;" loading="lazy" />
+              </div>
+              <div style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:space-between; gap:16px;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span class="pill pill-terracotta">{post.cluster}</span>
+                    <span style="font-size:12px; color:var(--ink-light);">{post.readTime}</span>
+                  </div>
+                  <h2 class="serif" style="font-size:25px; font-weight:600; color:var(--plum); margin:0 0 8px 0; line-height:1.18;">
+                    {post.title}
+                  </h2>
+                  <p style="font-size:14px; color:var(--ink-muted); margin:0;">{post.excerpt}</p>
+                </div>
+                <span style="font-size:13px; font-weight:600; color:var(--terracotta-deep);">Read full guide &rarr;</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.insight-card');
+
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-cluster') || 'all';
+        btns.forEach((b) => {
+          b.classList.remove('btn-primary', 'active');
+          b.classList.add('btn-soft');
+        });
+        btn.classList.remove('btn-soft');
+        btn.classList.add('btn-primary', 'active');
+
+        cards.forEach((card) => {
+          const cluster = card.getAttribute('data-cluster');
+          const show = selected === 'all' || cluster === selected;
+          (card as HTMLElement).style.display = show ? 'flex' : 'none';
+        });
+      });
+    });
+  </script>
+</BaseLayout>

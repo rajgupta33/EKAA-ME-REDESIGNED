@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EKAA_SITE, buildWhatsAppUrl, getVerticalHref } from '../data/site';
+
+const riseLink = getVerticalHref(EKAA_SITE.verticals.rise);
+const rejoiceLink = getVerticalHref(EKAA_SITE.verticals.rejoice);
+
+const schemas = [
+  {
+    '@type': 'WebPage',
+    '@id': `${EKAA_SITE.siteUrl}/ekaa-family/#webpage`,
+    url: `${EKAA_SITE.siteUrl}/ekaa-family/`,
+    name: 'The EKAA Umbrella — Ekaa Radiance, Ekaa Rise & Ekaa Rejoice',
+    about: { '@id': `${EKAA_SITE.siteUrl}/#organization` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'The EKAA Family', item: `${EKAA_SITE.siteUrl}/ekaa-family/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="The EKAA Family | Radiance, Rise & Rejoice by Mehak Marwaha"
+  description="Discover the three pillars under Mehak Marwaha’s EKAA umbrella: Ekaa Radiance (healing & numerology on ekaa.me), Ekaa Rise (career & study abroad), and Ekaa Rejoice (events)."
+  canonicalPath="/ekaa-family/"
+  pageSchemas={schemas}
+>
+  <section class="section-tight" style="border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:820px;">
+      <div class="eyebrow">MASTER BRAND ARCHITECTURE</div>
+      <h1 class="h1">One purpose, <em>three living expressions</em>.</h1>
+      <p class="lead">
+        Named after the word for <strong>Oneness</strong>, EKAA brings together three complementary pillars founded by Mehak Marwaha. Today, <strong>ekaa.me</strong> serves as the dedicated sanctuary for <strong>Ekaa Radiance</strong>, while Rise and Rejoice prepare their standalone homes.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="display:flex; flex-direction:column; gap:28px;">
+      <!-- Ekaa Radiance -->
+      <div id="radiance" class="surface-terracotta" style="padding:36px; border:2px solid var(--terracotta);">
+        <div class="family-brand">
+          <div style="max-width:680px;">
+            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px;">
+              <span class="pill pill-plum">Flagship on ekaa.me</span>
+              <span style="font-size:12px; font-weight:700; color:var(--terracotta-deep);">{EKAA_SITE.verticals.radiance.instagramHandle}</span>
+            </div>
+            <h2 class="h2" style="font-size:38px;">Ekaa Radiance</h2>
+            <p style="font-size:16px; color:var(--ink-muted); margin:0 0 18px 0;">
+              {EKAA_SITE.verticals.radiance.summary}
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              <a href="/radiance/" class="btn btn-primary">Explore Radiance Sessions &rarr;</a>
+              <a href="/book/" class="btn btn-soft">Book 1:1 Session</a>
+            </div>
+          </div>
+          <img class="vertical-logo" src={EKAA_SITE.verticals.radiance.logoPath} width="250" height="250" alt="" />
+        </div>
+      </div>
+
+      <!-- Ekaa Rise -->
+      <div id="rise" class="surface-sage" style="padding:36px;">
+        <div class="family-brand">
+          <div style="max-width:680px;">
+            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px;">
+              <span class="pill" style="background:var(--ivory); color:#465440;">{EKAA_SITE.verticals.rise.statusLabel}</span>
+              <span style="font-size:12px; font-weight:700; color:#465440;">{EKAA_SITE.verticals.rise.instagramHandle}</span>
+            </div>
+            <h2 class="h2" style="font-size:36px;">Ekaa Rise</h2>
+            <p style="font-size:15.5px; color:var(--ink-muted); margin:0 0 18px 0;">
+              Led by Mehak Marwaha as a <strong>UCLA-certified Career Counselor</strong>, Ekaa Rise supports students and families with psychometric testing, IB/CBSE/British/American curriculum selection, career clarity, and international university admissions.
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              {
+                riseLink.external ? (
+                  <a href={riseLink.href} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    Visit Ekaa Rise Website ↗
+                  </a>
+                ) : (
+                  <a
+                    href={buildWhatsAppUrl('Hi Mehak, I would like to enquire about Ekaa Rise (Career Counseling / Study Abroad).')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary"
+                  >
+                    Enquire About Ekaa Rise &rarr;
+                  </a>
+                )
+              }
+              <a href={EKAA_SITE.verticals.rise.instagramUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                Follow @ekaa_rise ↗
+              </a>
+            </div>
+          </div>
+          <img class="vertical-logo" src={EKAA_SITE.verticals.rise.logoPath} width="250" height="250" alt="" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Ekaa Rejoice -->
+      <div id="rejoice" class="surface-sand" style="padding:36px;">
+        <div class="family-brand">
+          <div style="max-width:680px;">
+            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px;">
+              <span class="pill" style="background:var(--ivory); color:var(--gold-text);">{EKAA_SITE.verticals.rejoice.statusLabel}</span>
+              <span style="font-size:12px; font-weight:700; color:var(--gold-text);">{EKAA_SITE.verticals.rejoice.instagramHandle}</span>
+            </div>
+            <h2 class="h2" style="font-size:36px;">Ekaa Rejoice</h2>
+            <p style="font-size:15.5px; color:var(--ink-muted); margin:0 0 18px 0;">
+              Ekaa Rejoice brings warmth and aesthetic care to milestone celebrations—curating bespoke birthday parties, corporate gatherings, boutique décor, and creative Art &amp; Terrarium workshops.
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              {
+                rejoiceLink.external ? (
+                  <a href={rejoiceLink.href} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    Visit Ekaa Rejoice Website ↗
+                  </a>
+                ) : (
+                  <a
+                    href={buildWhatsAppUrl('Hi Mehak, I would like to enquire about Ekaa Rejoice events or creative workshops.')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary"
+                  >
+                    Enquire About Ekaa Rejoice &rarr;
+                  </a>
+                )
+              }
+              <a href={EKAA_SITE.verticals.rejoice.instagramUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                Follow @ekaa_rejoice ↗
+              </a>
+            </div>
+          </div>
+          <img class="vertical-logo" src={EKAA_SITE.verticals.rejoice.logoPath} width="250" height="250" alt="" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .family-brand {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(20px, 4vw, 54px);
+  }
+
+  .family-brand > .vertical-logo {
+    --logo-size: 148px;
+  }
+
+  @media (max-width: 679px) {
+    .family-brand {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .family-brand > .vertical-logo {
+      --logo-size: 100px;
+      grid-row: 1;
+    }
+  }
+</style>

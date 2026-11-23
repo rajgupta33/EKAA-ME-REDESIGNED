@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { RADIANCE_SERVICES } from '../data/services';
+import { EKAA_SITE, buildWhatsAppUrl } from '../data/site';
+
+const schemas = [
+  {
+    '@type': 'WebPage',
+    '@id': `${EKAA_SITE.siteUrl}/book/#webpage`,
+    url: `${EKAA_SITE.siteUrl}/book/`,
+    name: 'Book a Private Session | Ekaa Radiance by Mehak Marwaha',
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Book a Session', item: `${EKAA_SITE.siteUrl}/book/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Book a Private Session | Ekaa Radiance by Mehak Marwaha"
+  description="Reserve your 1:1 Vedic Numerology, Reiki Healing, Tarot Life Coaching, or Akashic Record consultation with Mehak Marwaha in Dubai or online worldwide."
+  canonicalPath="/book/"
+  pageSchemas={schemas}
+>
+  <section class="section-tight" style="border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="max-width:740px;">
+        <div class="eyebrow">CALM RESERVATION</div>
+        <h1 class="h1">Reserve your <em>private space</em>.</h1>
+        <p class="lead">
+          Select your preferred modality and format below. You’ll receive confirmation and gentle preparation details within 24 hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap:36px; align-items:start;">
+        <!-- Left Interactive Request Form -->
+        <div class="surface-card" style="padding:34px;">
+          <h2 class="h3" style="font-size:30px; margin-bottom:6px;">Request Your Session Slot</h2>
+          <p style="font-size:14px; color:var(--ink-muted); margin:0 0 24px 0;">
+            Detected timezone: <strong id="detected-tz" style="color:var(--plum);">Dubai (GST)</strong>
+          </p>
+
+          <form id="booking-form" style="display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <label for="book-service" style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                1. Modality
+              </label>
+              <select id="book-service" name="service" required class="form-input">
+                {RADIANCE_SERVICES.map((s) => <option value={s.name} data-slug={s.slug}>{s.name} ({s.duration})</option>)}
+                <option value="Not Sure — Help Me Choose" data-slug="guidance">Not Sure Yet — Help Me Choose</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                2. Session Format
+              </label>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <label class="format-radio active">
+                  <input type="radio" name="format" value="Online Video" checked style="display:none;" />
+                  <span>Online Video (Global)</span>
+                </label>
+                <label class="format-radio">
+                  <input type="radio" name="format" value="Dubai In-Person" style="display:none;" />
+                  <span>Dubai In-Person</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div>
+                <label for="book-name" style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                  Your Name
+                </label>
+                <input id="book-name" name="name" type="text" required placeholder="Full name" class="form-input" />
+              </div>
+              <div>
+                <label for="book-email" style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                  Email Address
+                </label>
+                <input id="book-email" name="email" type="email" required placeholder="you@example.com" class="form-input" />
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div>
+                <label for="book-day" style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                  Preferred Day / Window
+                </label>
+                <input id="book-day" name="preferredWindow" type="text" placeholder="e.g. Weekdays after 4 PM GST" class="form-input" />
+              </div>
+              <div>
+                <label for="book-phone" style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                  WhatsApp / Phone
+                </label>
+                <input id="book-phone" name="phone" type="tel" placeholder="+971 ..." class="form-input" />
+              </div>
+            </div>
+
+            <div>
+              <label for="book-notes" style="display:block; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum); margin-bottom:6px;">
+                Brief Intention or Question (Optional)
+              </label>
+              <textarea id="book-notes" name="notes" rows="3" placeholder="Share anything helpful so Mehak can prepare calmly for you." class="form-input"></textarea>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:6px;">
+              <button type="submit" class="btn btn-primary" style="flex:1; min-width:210px;">
+                Confirm via WhatsApp Concierge &rarr;
+              </button>
+              <a id="book-mailto" href={`mailto:${EKAA_SITE.email}`} class="btn btn-soft" style="flex:1; min-width:170px;">
+                Send via Email
+              </a>
+            </div>
+          </form>
+
+          <div id="booking-confirmation" style="display:none; margin-top:20px; padding:18px; border-radius:14px; background:var(--sage-soft); border:1px solid rgba(155,166,148,0.45); font-size:14px; color:var(--plum);">
+            <strong>Ready to send:</strong> Your personalized request has opened cleanly. You can also reach Mehak directly at <a href={EKAA_SITE.phoneUAEHref} style="text-decoration:underline; font-weight:600;">{EKAA_SITE.phoneUAE}</a> or <a href={`mailto:${EKAA_SITE.email}`} style="text-decoration:underline; font-weight:600;">{EKAA_SITE.email}</a>.
+          </div>
+        </div>
+
+        <!-- Right Calm Expectations & Policies -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="surface-dark" style="padding:32px;">
+            <div class="eyebrow" style="color:var(--terracotta);">DIRECT CONCIERGE</div>
+            <h3 class="serif" style="font-size:30px; color:var(--porcelain); margin:0 0 10px 0;">Prefer to ask first?</h3>
+            <p style="font-size:14.5px; color:rgba(250,246,241,0.78); margin:0 0 20px 0;">
+              If you aren’t sure whether Numerology, Tarot Coaching, or Reiki fits best today, send a quick voice or text message on WhatsApp.
+            </p>
+            <a
+              href={buildWhatsAppUrl('Hi Mehak, I would love a quick recommendation on which Radiance session fits me best.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-terracotta"
+              style="width:100%;"
+            >
+              Chat on WhatsApp ({EKAA_SITE.phoneUAE}) &rarr;
+            </a>
+          </div>
+
+          <div class="surface-sand" style="padding:28px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-text); margin-bottom:10px;">
+              BOOKING CLARITY &amp; POLICIES
+            </div>
+            <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--ink-muted);">
+              <li><strong style="color:var(--plum);">24-Hour Confirmation:</strong> All booking requests receive confirmed slot &amp; payment details within 24 hours.</li>
+              <li><strong style="color:var(--plum);">Rescheduling:</strong> Complimentary rescheduling with 24 hours’ prior notice.</li>
+              <li><strong style="color:var(--plum);">Confidentiality:</strong> Every 1:1 session is strictly private and non-judgmental.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid #D7CBC1;
+    background: var(--porcelain);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    color: var(--plum);
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--terracotta-deep);
+    box-shadow: 0 0 0 3px rgba(213, 135, 116, 0.2);
+    background: var(--ivory);
+  }
+
+  .format-radio {
+    border: 1px solid #D7CBC1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    background: var(--porcelain);
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .format-radio.active {
+    background: var(--plum);
+    color: var(--porcelain);
+    border-color: var(--plum);
+  }
+</style>
+
+<script define:vars={{ whatsappDigits: EKAA_SITE.whatsappDigits, emailTo: EKAA_SITE.email }}>
+  const tzEl = document.getElementById('detected-tz');
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tzEl && tz) tzEl.textContent = `${tz} (aligned with Dubai GST)`;
+  } catch {}
+
+  // Pre-select ?service=slug from query string
+  const params = new URLSearchParams(window.location.search);
+  const serviceParam = params.get('service');
+  const selectEl = document.getElementById('book-service');
+  if (serviceParam && selectEl instanceof HTMLSelectElement) {
+    const match = Array.from(selectEl.options).find((o) => o.dataset.slug === serviceParam);
+    if (match) selectEl.value = match.value;
+  }
+
+  // Format radio styling
+  const radios = document.querySelectorAll('.format-radio');
+  radios.forEach((lbl) => {
+    lbl.addEventListener('click', () => {
+      radios.forEach((r) => r.classList.remove('active'));
+      lbl.classList.add('active');
+    });
+  });
+
+  function buildSummaryText() {
+    const service = (document.getElementById('book-service') instanceof HTMLSelectElement)
+      ? document.getElementById('book-service').value
+      : 'Radiance Session';
+    const formatInput = document.querySelector('input[name="format"]:checked');
+    const format = formatInput ? formatInput.value : 'Online Video';
+    const name = document.getElementById('book-name')?.value || '';
+    const email = document.getElementById('book-email')?.value || '';
+    const day = document.getElementById('book-day')?.value || 'Flexible';
+    const notes = document.getElementById('book-notes')?.value || '';
+    return `Hi Mehak, I would like to book a session at Ekaa Radiance.\n• Service: ${service}\n• Format: ${format}\n• Name: ${name}\n• Email: ${email}\n• Preferred Window: ${day}${notes ? `\n• Notes: ${notes}` : ''}`;
+  }
+
+  const form = document.getElementById('booking-form');
+  const confirmBox = document.getElementById('booking-confirmation');
+  const mailtoBtn = document.getElementById('book-mailto');
+
+  mailtoBtn?.addEventListener('click', (e) => {
+    const body = encodeURIComponent(buildSummaryText());
+    const subject = encodeURIComponent('Session Booking Request — Ekaa Radiance');
+    mailtoBtn.setAttribute('href', `mailto:${emailTo}?subject=${subject}&body=${body}`);
+  });
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const url = `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(buildSummaryText())}`;
+    if (confirmBox) confirmBox.style.display = 'block';
+    window.open(url, '_blank', 'noopener,noreferrer');
+  });
+</script>

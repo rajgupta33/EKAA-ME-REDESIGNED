@@ -1,0 +1,34 @@
+# Exact 301 & 410 Legacy Migration Rules for ekaa.me
+# Compatible with Cloudflare Pages / Netlify (_redirects)
+
+# Legacy Founder & Trust Pages -> Consolidate into /mehak-marwaha/
+/about-me/        /mehak-marwaha/   301
+/about-me         /mehak-marwaha/   301
+/about-us/        /mehak-marwaha/   301
+/about-us         /mehak-marwaha/   301
+/about/           /mehak-marwaha/   301
+/about            /mehak-marwaha/   301
+/why-choose-us/   /mehak-marwaha/   301
+/why-choose-us    /mehak-marwaha/   301
+
+# Duplicate Radiance & Contact Pages
+/radiance-2/      /radiance/        301
+/radiance-2       /radiance/        301
+/contact-us/      /contact/         301
+/contact-us       /contact/         301
+
+# Sister Verticals (While standalone domains are launching)
+/rise/            /ekaa-family/#rise     301
+/rise             /ekaa-family/#rise     301
+/rejoice/         /ekaa-family/#rejoice  301
+/rejoice          /ekaa-family/#rejoice  301
+
+# WordPress / Elementor Junk & Polluted Posts -> 410 Gone
+/rise-2/          /                 410
+/rejoice-2/       /                 410
+/home-2/          /                 410
+/home/            /                 410
+/sample-page/     /                 410
+/blog/            /insights/        301
+/__trashed/       /                 410
+/wp-sitemap.xml   /sitemap.xml      301

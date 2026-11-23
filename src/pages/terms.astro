@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EKAA_SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Session Terms & Wellness Disclaimer | EKAA"
+  description="Transparent booking, rescheduling, and non-medical holistic coaching terms for Ekaa Radiance sessions with Mehak Marwaha."
+  canonicalPath="/terms/"
+>
+  <section class="section">
+    <div class="container" style="max-width:780px;">
+      <div class="eyebrow">TRANSPARENT GUIDELINES</div>
+      <h1 class="h1" style="font-size:48px;">Session Terms &amp; Disclaimer</h1>
+      <p style="color:var(--ink-muted); font-size:15px;">Effective November 2026 · {EKAA_SITE.brandName}</p>
+
+      <div class="surface-card" style="padding:32px; margin-top:24px; display:flex; flex-direction:column; gap:18px; font-size:15px; color:var(--ink-muted);">
+        <div>
+          <h2 class="h3" style="font-size:24px;">1. Holistic Wellness &amp; Non-Medical Scope</h2>
+          <p style="margin:0;">All Ekaa Radiance sessions—including Reiki Healing Energy, Vedic Numerology, Tarot Life Coaching, Akashic Record Readings, Pendulum Dowsing, Meditation, and Workshops—are holistic self-reflection and relaxation services. They are not medical, psychological, legal, or financial advice and do not replace licensed professional care.</p>
+        </div>
+        <div>
+          <h2 class="h3" style="font-size:24px;">2. Non-Predictive Coaching Ethos</h2>
+          <p style="margin:0;">Sessions offer perspective and reflective guidance rather than deterministic future predictions or guaranteed life outcomes.</p>
+        </div>
+        <div>
+          <h2 class="h3" style="font-size:24px;">3. Rescheduling &amp; Bookings</h2>
+          <p style="margin:0;">We kindly ask for at least 24 hours’ notice to reschedule a confirmed 1:1 appointment via WhatsApp ({EKAA_SITE.phoneUAE}) or {EKAA_SITE.email}.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

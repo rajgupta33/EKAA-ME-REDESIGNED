@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { INSIGHT_ARTICLES, type InsightArticle } from '../../data/insights';
+import { EKAA_SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return INSIGHT_ARTICLES.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: InsightArticle;
+}
+
+const { article } = Astro.props;
+const canonicalPath = `/insights/${article.slug}/`;
+
+const schemas = [
+  {
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.updatedAt,
+    dateModified: article.updatedAt,
+    author: { '@id': `${EKAA_SITE.siteUrl}/#mehak-marwaha` },
+    publisher: { '@id': `${EKAA_SITE.siteUrl}/#organization` },
+    mainEntityOfPage: `${EKAA_SITE.siteUrl}${canonicalPath}`,
+    image: `${EKAA_SITE.siteUrl}${article.image}`,
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: `${EKAA_SITE.siteUrl}/insights/` },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `${EKAA_SITE.siteUrl}${canonicalPath}` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${article.title} | Ekaa Radiance`}
+  description={article.excerpt}
+  canonicalPath={canonicalPath}
+  ogImage={article.image}
+  pageSchemas={schemas}
+>
+  <article style="padding:44px 0 88px 0;">
+    <div class="container" style="max-width:780px;">
+      <nav aria-label="Breadcrumb" style="font-size:12px; color:var(--ink-light); margin-bottom:20px; display:flex; gap:8px; flex-wrap:wrap;">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/insights/">Insights</a>
+        <span>/</span>
+        <span style="color:var(--terracotta-deep); font-weight:600;">{article.cluster}</span>
+      </nav>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px;">
+        <span class="pill pill-terracotta">{article.cluster}</span>
+        <span style="font-size:12.5px; color:var(--ink-light);">{article.readTime} · Updated {article.updatedAt}</span>
+      </div>
+
+      <h1 class="h1" style="font-size:clamp(2.2rem, 4.2vw, 3.4rem);">{article.title}</h1>
+
+      <!-- Answer-First Key Takeaway Box -->
+      <div class="answer-callout" style="margin:26px 0 32px 0;">
+        <div style="font-size:10.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terracotta-deep); margin-bottom:6px;">
+          KEY TAKEAWAY
+        </div>
+        <p style="margin:0; font-size:15.5px; color:var(--plum);">{article.keyTakeaway}</p>
+      </div>
+
+      <div style="border-radius:20px; overflow:hidden; border:1px solid var(--border); margin-bottom:36px; aspect-ratio: 16 / 9;">
+        <img src={article.image} alt={article.imageAlt} style="width:100%; height:100%; object-fit:cover;" />
+      </div>
+
+      <!-- Article Body -->
+      <div style="display:flex; flex-direction:column; gap:28px;">
+        {
+          article.sections.map((sec) => (
+            <section>
+              <h2 class="h2" style="font-size:30px; margin-bottom:12px;">{sec.heading}</h2>
+              {sec.paragraphs.map((p) => (
+                <p style="font-size:16.5px; line-height:1.75; color:var(--ink-muted); margin:0 0 14px 0;">{p}</p>
+              ))}
+            </section>
+          ))
+        }
+      </div>
+
+      <!-- Author Box -->
+      <div class="surface-sand" style="padding:24px 28px; margin-top:42px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:18px;">
+        <div>
+          <div style="font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-text); margin-bottom:4px;">WRITTEN BY</div>
+          <div class="serif" style="font-size:24px; font-weight:600; color:var(--plum);">{EKAA_SITE.founder.name}</div>
+          <div style="font-size:13.5px; color:var(--ink-muted);">Founder of EKAA · Holistic Clarity Coach in Dubai</div>
+        </div>
+        <a href="/mehak-marwaha/" class="btn btn-outline">About Mehak &rarr;</a>
+      </div>
+
+      <!-- Soft Contextual Session Invite -->
+      <div class="surface-dark" style="padding:32px; margin-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px;">
+        <div>
+          <div style="font-size:10.5px; font-weight:700; letter-spacing:0.16em; color:var(--terracotta); text-transform:uppercase; margin-bottom:5px;">CONTINUE YOUR REFLECTION</div>
+          <div class="serif" style="font-size:28px; color:var(--porcelain);">Explore {article.relatedServiceName}</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href={`/radiance/${article.relatedServiceSlug}/`} class="btn btn-terracotta">View Session &rarr;</a>
+          <a href={`/book/?service=${article.relatedServiceSlug}`} class="btn btn-outline-light">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

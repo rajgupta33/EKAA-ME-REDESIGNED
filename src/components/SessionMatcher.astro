@@ -1,0 +1,162 @@
+---
+import { RADIANCE_SERVICES } from '../data/services';
+import { buildWhatsAppUrl } from '../data/site';
+
+const matcherData = RADIANCE_SERVICES.map((s) => ({
+  slug: s.slug,
+  name: s.name,
+  intent: s.intent,
+  duration: s.duration,
+  tagline: s.tagline,
+  whatsappUrl: buildWhatsAppUrl(s.whatsappPrefill),
+}));
+---
+
+<div class="surface-dark matcher-box" id="session-matcher" style="padding:36px 32px;">
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:32px; align-items:center;">
+    <div>
+      <div class="eyebrow" style="color:var(--terracotta); margin-bottom:10px;">INTERACTIVE GUIDANCE</div>
+      <h3 class="serif" style="font-size:clamp(1.85rem, 2.8vw, 2.5rem); color:var(--porcelain); margin:0 0 10px 0; line-height:1.1;">
+        Not sure where to begin? <em style="color:var(--terracotta);">Match your moment.</em>
+      </h3>
+      <p style="font-size:14.5px; color:rgba(250,246,241,0.74); margin:0 0 22px 0;">
+        Select what you are navigating today to reveal Mehak’s recommended starting session—zero guesswork.
+      </p>
+
+      <!-- Step 1: Emotional Need -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">
+          1. WHAT FEELS CLOSEST RIGHT NOW?
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;" role="group" aria-label="Select your current need">
+          <button type="button" class="matcher-chip active" data-need="clarity-decisions">Clarity on a Life Choice</button>
+          <button type="button" class="matcher-chip" data-need="clarity-patterns">Life Blueprint &amp; Timing</button>
+          <button type="button" class="matcher-chip" data-need="calm-rest">Deep Rest &amp; Stress Relief</button>
+          <button type="button" class="matcher-chip" data-need="calm-mind">Daily Calm &amp; Focus</button>
+          <button type="button" class="matcher-chip" data-need="soul-roots">Recurring Soul Patterns</button>
+          <button type="button" class="matcher-chip" data-need="community">Learn in a Workshop</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Format -->
+      <div>
+        <div style="font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">
+          2. PREFERRED FORMAT
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;" role="group" aria-label="Select preferred format">
+          <button type="button" class="format-chip active" data-format="Online Video">Online Video (Global)</button>
+          <button type="button" class="format-chip" data-format="Dubai In-Person">Dubai In-Person</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Result Card -->
+    <div style="background:rgba(250,246,241,0.06); border:1px solid rgba(213,135,116,0.34); border-radius:20px; padding:26px; display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px;">
+          <span style="font-size:10.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--terracotta);">
+            RECOMMENDED STARTING PATH
+          </span>
+          <span id="matcher-meta" style="font-size:11px; color:rgba(250,246,241,0.68);">60 Minutes · Online Video</span>
+        </div>
+        <h4 id="matcher-title" class="serif" style="font-size:32px; color:var(--porcelain); margin:0 0 8px 0; line-height:1.1;">
+          Tarot Life Coaching
+        </h4>
+        <p id="matcher-desc" style="font-size:14px; line-height:1.6; color:rgba(250,246,241,0.8); margin:0;">
+          Thoughtful, non-predictive tarot conversations for real-life decisions.
+        </p>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <a id="matcher-explore" href="/radiance/tarot-life-coaching/" class="btn btn-terracotta" style="flex:1; min-width:170px;">
+          Explore Session &rarr;
+        </a>
+        <a id="matcher-whatsapp" href={buildWhatsAppUrl('Hi Mehak, I would like to ask about Tarot Life Coaching (Online Video).')} target="_blank" rel="noopener noreferrer" class="btn btn-outline-light" style="flex:1; min-width:160px;">
+          Ask on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .matcher-chip,
+  .format-chip {
+    background: rgba(250, 246, 241, 0.08);
+    color: rgba(250, 246, 241, 0.84);
+    border: 1px solid rgba(250, 246, 241, 0.16);
+    border-radius: 999px;
+    padding: 8px 15px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+
+  .matcher-chip:hover,
+  .format-chip:hover {
+    border-color: var(--terracotta);
+    color: #FAF6F1;
+  }
+
+  .matcher-chip.active,
+  .format-chip.active {
+    background: var(--terracotta);
+    color: var(--plum);
+    border-color: var(--terracotta);
+    font-weight: 700;
+  }
+</style>
+
+<script define:vars={{ matcherData }}>
+  const needToSlug = {
+    'clarity-decisions': 'tarot-life-coaching',
+    'clarity-patterns': 'vedic-numerology',
+    'calm-rest': 'reiki-healing',
+    'calm-mind': 'meditation',
+    'soul-roots': 'akashic-records',
+    'community': 'workshops',
+  };
+
+  let currentNeed = 'clarity-decisions';
+  let currentFormat = 'Online Video';
+
+  const root = document.getElementById('session-matcher');
+  const titleEl = document.getElementById('matcher-title');
+  const descEl = document.getElementById('matcher-desc');
+  const metaEl = document.getElementById('matcher-meta');
+  const exploreEl = document.getElementById('matcher-explore');
+  const waEl = document.getElementById('matcher-whatsapp');
+
+  function renderMatch() {
+    const slug = needToSlug[currentNeed] || 'vedic-numerology';
+    const svc = matcherData.find((s) => s.slug === slug) || matcherData[0];
+    if (!svc || !titleEl || !descEl || !metaEl || !exploreEl || !waEl) return;
+
+    titleEl.textContent = svc.name;
+    descEl.textContent = svc.tagline;
+    metaEl.textContent = `${svc.duration} · ${currentFormat}`;
+    exploreEl.setAttribute('href', `/radiance/${svc.slug}/`);
+    const msg = `Hi Mehak, I used the session matcher and would like to enquire about ${svc.name} (${currentFormat}).`;
+    waEl.setAttribute('href', `https://wa.me/971562046096?text=${encodeURIComponent(msg)}`);
+  }
+
+  root?.querySelectorAll('.matcher-chip').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      root.querySelectorAll('.matcher-chip').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentNeed = btn.getAttribute('data-need') || 'clarity-decisions';
+      renderMatch();
+    });
+  });
+
+  root?.querySelectorAll('.format-chip').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      root.querySelectorAll('.format-chip').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFormat = btn.getAttribute('data-format') || 'Online Video';
+      renderMatch();
+    });
+  });
+</script>

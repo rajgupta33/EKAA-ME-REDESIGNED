@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SessionMatcher from '../../components/SessionMatcher.astro';
+import { RADIANCE_SERVICES } from '../../data/services';
+import { EKAA_SITE, buildWhatsAppUrl } from '../../data/site';
+
+const generalFaqs = [
+  {
+    question: 'Are Ekaa Radiance sessions available both in Dubai and online?',
+    answer:
+      'Yes. All 1:1 consultations—including Vedic Numerology, Reiki Healing Energy, Tarot Life Coaching, Akashic Record Reading, Pendulum Dowsing, and Meditation coaching—are available in-person in Dubai as well as over private video call worldwide.',
+  },
+  {
+    question: 'Which session should I choose if this is my very first time?',
+    answer:
+      'If you feel mentally overwhelmed or at a crossroads, Tarot Life Coaching or Vedic Numerology offer structured clarity. If your body and nervous system feel exhausted, begin with Reiki Healing Energy. You can also use our interactive matcher above or message Mehak on WhatsApp.',
+  },
+  {
+    question: 'What is Mehak Marwaha’s policy on predictions and medical claims?',
+    answer:
+      'Ekaa Radiance practices strictly grounded, ethical guidance: non-predictive coaching focused on empowering your choices, and non-medical holistic relaxation meant to complement—never replace—licensed healthcare.',
+  },
+];
+
+const schemas = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${EKAA_SITE.siteUrl}/radiance/#webpage`,
+    url: `${EKAA_SITE.siteUrl}/radiance/`,
+    name: 'Ekaa Radiance — Holistic Healing, Vedic Numerology & Reiki in Dubai',
+    about: { '@id': `${EKAA_SITE.siteUrl}/#organization` },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: generalFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${EKAA_SITE.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Ekaa Radiance', item: `${EKAA_SITE.siteUrl}/radiance/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Ekaa Radiance | Numerology, Reiki, Tarot & Workshops in Dubai"
+  description="Explore all 7 Ekaa Radiance modalities led by Mehak Marwaha: Vedic Numerology, Reiki Healing, Tarot Life Coaching, Akashic Records, Pendulum Dowsing, Meditation & Workshops."
+  canonicalPath="/radiance/"
+  pageSchemas={schemas}
+>
+  <section class="section-tight section-dark radiance-intro">
+    <div class="container radiance-intro-grid">
+      <div>
+        <div class="eyebrow">EKAA RADIANCE HUB</div>
+        <h1 class="h1">Heal, reflect, and <em>realign</em>.</h1>
+        <div>
+          <p class="lead">
+            <strong>At Ekaa Radiance</strong>, Mehak Marwaha brings together seven time-honored modalities—Vedic Numerology, Reiki Healing Energy, Tarot Life Coaching, Akashic Record Reading, Pendulum Dowsing, Meditation Practices, and Transformative Workshops—delivered with grounded warmth in Dubai and online worldwide.
+          </p>
+        </div>
+      </div>
+      <img class="radiance-intro-image" src="/images/crystal-lotus-mobile.webp" width="560" height="700" fetchpriority="high" alt="" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3" style="margin-bottom:54px;">
+        {
+          RADIANCE_SERVICES.map((service) => (
+            <a href={`/radiance/${service.slug}/`} class="surface-card interactive" style="overflow:hidden; display:flex; flex-direction:column;">
+              <div style="aspect-ratio: 16 / 10; overflow:hidden; position:relative;">
+                <img src={service.image} alt={service.imageAlt} class="img-zoom" style="width:100%; height:100%; object-fit:cover;" loading="lazy" />
+                <span class={`pill pill-${service.theme}`} style="position:absolute; top:14px; left:14px;">
+                  {service.intentLabel}
+                </span>
+              </div>
+              <div style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:space-between; gap:16px;">
+                <div>
+                  <div style="font-size:11.5px; font-weight:600; color:var(--ink-light); margin-bottom:6px;">{service.duration}</div>
+                  <h2 class="h3">{service.name}</h2>
+                  <p style="font-size:14.5px; color:var(--ink-muted); margin:0;">{service.tagline}</p>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--border); font-size:13px; font-weight:600; color:var(--terracotta-deep);">
+                  <span>{service.format}</span>
+                  <span>View 7-step guide &rarr;</span>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <SessionMatcher />
+    </div>
+  </section>
+
+  <!-- Populated FAQs -->
+  <section class="section-tight" style="background:var(--ivory); border-top:1px solid var(--border);">
+    <div class="container" style="max-width:860px;">
+      <div class="eyebrow">FREQUENTLY ASKED QUESTIONS</div>
+      <h2 class="h2" style="margin-bottom:28px;">Before you book your <em>first session</em>.</h2>
+      <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:36px;">
+        {
+          generalFaqs.map((faq, idx) => (
+            <details class="faq-item" open={idx === 0}>
+              <summary>
+                <span>{faq.question}</span>
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="faq-answer">{faq.answer}</div>
+            </details>
+          ))
+        }
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:14px;">
+        <a href="/book/" class="btn btn-primary">Book a Private Session &rarr;</a>
+        <a href={buildWhatsAppUrl('Hi Mehak, I have a question about Ekaa Radiance sessions.')} target="_blank" rel="noopener noreferrer" class="btn btn-soft">
+          Ask on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .radiance-intro {
+    overflow: hidden;
+    background: radial-gradient(ellipse at 80% 30%, #613629, transparent 57%), #21151e;
+    border-bottom: 1px solid #986750;
+  }
+
+  .radiance-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(28px, 6vw, 88px);
+  }
+
+  .radiance-intro-image {
+    display: block;
+    width: min(100%, 320px);
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center 78%;
+    justify-self: center;
+    border-radius: 50% 50% 20px 20px / 42% 42% 20px 20px;
+    border: 1px solid #dda57c85;
+    box-shadow: 0 0 0 7px #f6c49c12, 0 20px 50px #0c060a99;
+  }
+
+  @media (max-width: 699px) {
+    .radiance-intro-grid { grid-template-columns: minmax(0, 1fr); }
+    .radiance-intro-image { width: min(88%, 270px); }
+  }
+</style>
